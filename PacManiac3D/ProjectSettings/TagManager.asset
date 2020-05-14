@@ -10,6 +10,17 @@ TagManager:
   - parede
   - bala
   - balaE
+  - flagV
+  - flagA
+  - speedPU
+  - fireratePU
+  - shieldPU
+  - speedPU2
+  - fireratePU2
+  - shieldPU2
+  - speedDownPU2
+  - speedDownPU
+  - center2
   layers:
   - Default
   - TransparentFX

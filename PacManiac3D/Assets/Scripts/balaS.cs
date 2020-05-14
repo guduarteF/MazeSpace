@@ -27,7 +27,9 @@ public class balaS : MonoBehaviour
         Debug.Log(other.transform.name);
         if (other.gameObject.CompareTag("parede"))
         {
+            Destroy(other.gameObject);
             Destroy(gameObject);
+            
 
         }
     }

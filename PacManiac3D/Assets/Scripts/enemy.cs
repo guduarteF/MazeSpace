@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class enemy : MonoBehaviour
 {
@@ -32,6 +33,20 @@ public class enemy : MonoBehaviour
     public float fire_rate = 2f;
     public float time_between_shoots;
 
+    public ParticleSystem part;
+    public MeshRenderer mesh;
+    public MeshRenderer cilindermesh;
+
+    public GameObject flag;
+    private bool flagcaptured;
+
+    private bool speeddown;
+    private bool shield;
+    private bool speed;
+    private bool firerate;
+    public float velocity;
+
+    
     
 
 
@@ -47,6 +62,7 @@ public class enemy : MonoBehaviour
         disabilita = true;
         e = this;
         deploymentHeight = 45f;
+        velocity = 2.5f;
 
     }
 
@@ -119,7 +135,7 @@ public class enemy : MonoBehaviour
             if (gameObject.transform.position != pontoDeColisao1.transform.position)
             {
 
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao1.transform.position, 0.1f * 2.5f);
+                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao1.transform.position, 0.1f * velocity);
                 var = false;
             }
             else
@@ -138,7 +154,7 @@ public class enemy : MonoBehaviour
         {
             if (gameObject.transform.position != pontoDeColisao4.transform.position)
             {
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao4.transform.position, 0.1f * 2.5f);
+                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao4.transform.position, 0.1f * velocity);
                 var = false;
             }
             else
@@ -158,7 +174,7 @@ public class enemy : MonoBehaviour
         {
             if (gameObject.transform.position != pontoDeColisao2.transform.position)
             {
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao2.transform.position, 0.1f * 2.5f);
+                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao2.transform.position, 0.1f * velocity);
                 var = false;
             }
             else
@@ -177,7 +193,7 @@ public class enemy : MonoBehaviour
         {
             if (gameObject.transform.position != pontoDeColisao3.transform.position)
             {
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao3.transform.position, 0.1f * 2.5F);
+                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao3.transform.position, 0.1f * velocity);
                 var = false;
             }
             else
@@ -207,7 +223,28 @@ public class enemy : MonoBehaviour
             {
                 Atirar();
             }
-        
+
+        if (flagcaptured == true)
+        {
+            flag.transform.position = gameObject.transform.position;
+        }
+
+
+        if(speed == true)
+        {
+            velocity = 5f;
+        }
+        if(firerate == true)
+        {
+            fire_rate = 0.5f;
+        }
+        if(speeddown == true)
+        {
+            final.f.velocity = 1.3f; 
+        }
+       
+
+
     }
 
 
@@ -216,15 +253,60 @@ public class enemy : MonoBehaviour
 
 
 
-        if (other.gameObject.CompareTag("center"))
+        if (other.gameObject.CompareTag("center2"))
         {
             terminocenter = true;
 
         }
         if (other.gameObject.CompareTag("bala"))
         {
-            Destroy(gameObject);
+            shield = false;
+
+            if(shield == false)
+            {
+                Morte();
+            }
+          
+            
         }
+
+        if(other.gameObject.CompareTag("flagA"))
+        {
+            flagcaptured = true;
+
+        }
+
+        if(other.gameObject.CompareTag("flagV") && flagcaptured == true)
+        {
+            placar.enemypoints++;
+            SceneManager.LoadScene(0);
+
+        }
+
+        if(other.gameObject.CompareTag("shieldPU2"))
+        {
+            shield = true;
+            Debug.Log("shield");
+        }
+
+        if(other.gameObject.CompareTag("speedPU2"))
+        {
+            speed = true;
+            Debug.Log("speed");
+        }
+
+        if(other.gameObject.CompareTag("fireratePU2"))
+        {
+            firerate = true;
+            Debug.Log("FIRERATE");
+        }
+
+        if(other.gameObject.CompareTag("speedDownPU2"))
+        {
+            speeddown = true;
+            Debug.Log("speed down"); 
+        }
+     
     }
 
     void Atirar()
@@ -235,4 +317,18 @@ public class enemy : MonoBehaviour
 
 
     }
+    
+    void Morte()
+    {
+        placar.playerpoints++;
+        part.transform.position = gameObject.transform.position;
+        part.Play();
+        StartCoroutine(menuManager.RestartDelay());
+        // Destroy(gameObject);
+        mesh.enabled = false;
+        cilindermesh.enabled = false;
+    }
+
+   
+
 }
