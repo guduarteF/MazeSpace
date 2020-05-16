@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class enemy : MonoBehaviour
 {
@@ -23,28 +24,27 @@ public class enemy : MonoBehaviour
 
     public bool terminocenter;
     public bool var;
-
-
     public static bool disabilita;
-
     public GameObject bala;
     public GameObject spawnPoint;
-
     public float fire_rate = 2f;
     public float time_between_shoots;
-
     public ParticleSystem part;
     public MeshRenderer mesh;
     public MeshRenderer cilindermesh;
-
     public GameObject flag;
     private bool flagcaptured;
-
     private bool speeddown;
     private bool shield;
     private bool speed;
     private bool firerate;
     public float velocity;
+    public GameObject shieldSphere;
+    public ParticleSystem speedpart;
+    public GameObject textgo;
+    public Text textui;
+    private bool morreu;
+
 
     
     
@@ -62,12 +62,20 @@ public class enemy : MonoBehaviour
         disabilita = true;
         e = this;
         deploymentHeight = 45f;
-        velocity = 2.5f;
+        velocity = 30f;
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.RightControl) && Time.time > time_between_shoots)
+        {
+            Atirar();
+        }
+    }
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         #region input and raycast
 
@@ -135,7 +143,7 @@ public class enemy : MonoBehaviour
             if (gameObject.transform.position != pontoDeColisao1.transform.position)
             {
 
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao1.transform.position, 0.1f * velocity);
+                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao1.transform.position, 0.5f * velocity * Time.deltaTime);
                 var = false;
             }
             else
@@ -154,7 +162,7 @@ public class enemy : MonoBehaviour
         {
             if (gameObject.transform.position != pontoDeColisao4.transform.position)
             {
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao4.transform.position, 0.1f * velocity);
+                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao4.transform.position, 0.5f * velocity * Time.deltaTime);
                 var = false;
             }
             else
@@ -174,7 +182,7 @@ public class enemy : MonoBehaviour
         {
             if (gameObject.transform.position != pontoDeColisao2.transform.position)
             {
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao2.transform.position, 0.1f * velocity);
+                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao2.transform.position, 0.5f * velocity * Time.deltaTime);
                 var = false;
             }
             else
@@ -193,7 +201,7 @@ public class enemy : MonoBehaviour
         {
             if (gameObject.transform.position != pontoDeColisao3.transform.position)
             {
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao3.transform.position, 0.1f * velocity);
+                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao3.transform.position, 0.5f * velocity * Time.deltaTime);
                 var = false;
             }
             else
@@ -219,10 +227,7 @@ public class enemy : MonoBehaviour
         #endregion
         
 
-            if (Input.GetKeyUp(KeyCode.RightControl) && Time.time > time_between_shoots)
-            {
-                Atirar();
-            }
+         
 
         if (flagcaptured == true)
         {
@@ -232,15 +237,35 @@ public class enemy : MonoBehaviour
 
         if(speed == true)
         {
-            velocity = 5f;
+            velocity = 60f;
+            textgo.SetActive(true);
+            textui.text = "Speed UP";
         }
+       
+
         if(firerate == true)
         {
             fire_rate = 0.5f;
+            textgo.SetActive(true);
+            textui.text = "Fire-rate Buff";
+        }
+        else
+        {
+            fire_rate = 2;
+            
+            
         }
         if(speeddown == true)
         {
-            final.f.velocity = 1.3f; 
+            final.f.velocity = 0;
+            textgo.SetActive(true);
+            textui.text = "Stun Blue Player";
+        }
+        if(morreu == false && speed == false)
+        {
+            velocity = 30f;
+            
+            
         }
        
 
@@ -260,14 +285,20 @@ public class enemy : MonoBehaviour
         }
         if (other.gameObject.CompareTag("bala"))
         {
-            shield = false;
+            
 
             if(shield == false)
             {
                 Morte();
             }
-          
+            else
+            {
+                shield = false;
+                shieldSphere.SetActive(false);
+            }
             
+
+
         }
 
         if(other.gameObject.CompareTag("flagA"))
@@ -279,32 +310,47 @@ public class enemy : MonoBehaviour
         if(other.gameObject.CompareTag("flagV") && flagcaptured == true)
         {
             placar.enemypoints++;
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
+            part.transform.position = gameObject.transform.position;
+            part.Play();
 
         }
 
         if(other.gameObject.CompareTag("shieldPU2"))
         {
             shield = true;
+            shieldSphere.SetActive(true);
             Debug.Log("shield");
+            Destroy(other.gameObject);
+            part.transform.position = gameObject.transform.position;
+            part.Play();
         }
 
         if(other.gameObject.CompareTag("speedPU2"))
         {
-            speed = true;
+            StartCoroutine(speedI());
             Debug.Log("speed");
+            Destroy(other.gameObject);
+            part.transform.position = gameObject.transform.position;
+            part.Play();
         }
 
         if(other.gameObject.CompareTag("fireratePU2"))
         {
-            firerate = true;
+            StartCoroutine(firerateI());
             Debug.Log("FIRERATE");
+            Destroy(other.gameObject);
+            part.transform.position = gameObject.transform.position;
+            part.Play();
         }
 
         if(other.gameObject.CompareTag("speedDownPU2"))
         {
-            speeddown = true;
-            Debug.Log("speed down"); 
+            StartCoroutine(stun());
+            Debug.Log("speed down");
+            Destroy(other.gameObject);
+            part.transform.position = gameObject.transform.position;
+            part.Play();
         }
      
     }
@@ -320,15 +366,43 @@ public class enemy : MonoBehaviour
     
     void Morte()
     {
+        morreu = true;
         placar.playerpoints++;
         part.transform.position = gameObject.transform.position;
         part.Play();
+        velocity = 0;
         StartCoroutine(menuManager.RestartDelay());
         // Destroy(gameObject);
         mesh.enabled = false;
         cilindermesh.enabled = false;
     }
 
+    IEnumerator speedI()
+    {
+        speed = true;
+        speedpart.Play();
+        yield return new WaitForSeconds(3);
+        textgo.SetActive(false);
+        speedpart.Stop();
+        speed = false;
+        Debug.Log("speed false");
+    }
+    IEnumerator firerateI()
+    {
+        firerate = true;
+        yield return new WaitForSeconds(8);
+        textgo.SetActive(false);
+        firerate = false;
+        Debug.Log("firerate false");
+    }
+    IEnumerator stun()
+    {
+        speeddown = true;
+        yield return new WaitForSeconds(2);
+        textgo.SetActive(false);
+        speeddown = false;
+        Debug.Log("stun false");
+    }
    
 
 }

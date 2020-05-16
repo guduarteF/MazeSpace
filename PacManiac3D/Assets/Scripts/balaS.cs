@@ -17,7 +17,7 @@ public class balaS : MonoBehaviour
     void Update()
     {
         Color red = Color.red;
-        transform.Translate(Vector3.back * veloc);
+        transform.Translate(Vector3.back * veloc * Time.deltaTime);
 
     }
   

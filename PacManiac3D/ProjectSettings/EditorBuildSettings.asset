@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Sampleideguitarra.unity
-    guid: 245353737e91bf04f95477c0865f2b96
-  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Sampleideguitarra.unity
+    guid: 245353737e91bf04f95477c0865f2b96
   - enabled: 1
     path: Assets/Scenes/Controls.unity
     guid: 0020cc26728405a49b0a28d39d696e29

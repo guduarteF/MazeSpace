@@ -43,7 +43,7 @@ public class menuManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         placar.playerpoints = 0;
         placar.enemypoints = 0;
     }
@@ -55,7 +55,7 @@ public class menuManager : MonoBehaviour
 
     public void Menu()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void Pause()
@@ -72,7 +72,7 @@ public class menuManager : MonoBehaviour
     public static IEnumerator RestartDelay()
     {       
         yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
    
