@@ -51,6 +51,7 @@ public class final : MonoBehaviour
     public GameObject textgo;
     public Text textui;
     private bool morreu;
+    private bool novenoventaenove;
 
 
 
