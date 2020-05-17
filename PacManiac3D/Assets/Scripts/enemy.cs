@@ -44,6 +44,7 @@ public class enemy : MonoBehaviour
     public GameObject textgo;
     public Text textui;
     private bool morreu;
+    private bool nine;
 
 
     
