@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class enemy : MonoBehaviour
+public class enemy : NetworkBehaviour
 {
     public float deploymentHeight;
     public static enemy e;
@@ -44,11 +45,13 @@ public class enemy : MonoBehaviour
     public GameObject textgo;
     public Text textui;
     private bool morreu;
-    private bool nine;
 
 
-    
-    
+
+
+
+
+
 
 
 
@@ -64,23 +67,30 @@ public class enemy : MonoBehaviour
         e = this;
         deploymentHeight = 45f;
         velocity = 30f;
+        
 
     }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.RightControl) && Time.time > time_between_shoots)
+        if (isLocalPlayer)
         {
-            Atirar();
+            if (Input.GetKeyUp(KeyCode.RightControl) && Time.time > time_between_shoots)
+            {
+                Atirar();
+            }
         }
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         #region input and raycast
+        if (isLocalPlayer)
+        {
 
-        if (terminocenter == true && ismovingA == false && ismovingD == false && ismovingS == false && ismovingW == false)
+            if (terminocenter == true && ismovingA == false && ismovingD == false && ismovingS == false && ismovingW == false)
             {
 
                 if (Input.GetKey(KeyCode.UpArrow) && Physics.Raycast(transform.position, Vector3.forward, out pontoDeColisao1, deploymentHeight, points) && ismovingD == false && ismovingA == false && ismovingS == false && ismovingD == false && ismovingW == false)
@@ -129,6 +139,8 @@ public class enemy : MonoBehaviour
 
 
             }
+        }
+
         #endregion
 
 
@@ -136,83 +148,86 @@ public class enemy : MonoBehaviour
 
 
         #region movement
-
-
-        //XXXXXXXXXXXXXXXXXXXX MOVING XXXXXXXXXXXXXXXXXXXXXX
-        if (ismovingW == true)
+        if (isLocalPlayer)
         {
-            if (gameObject.transform.position != pontoDeColisao1.transform.position)
+            if (ismovingW == true)
             {
+                if (gameObject.transform.position != pontoDeColisao1.transform.position)
+                {
 
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao1.transform.position, 0.5f * velocity * Time.deltaTime);
-                var = false;
-            }
-            else
-            {
-                var = true;
-                ismovingW = false;
-                ismovingA = false;
-                ismovingS = false;
-                ismovingD = false;
-            }
+                    transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao1.transform.position, 0.5f * velocity * Time.deltaTime);
+                    var = false;
+                }
+                else
+                {
+                    var = true;
+                    ismovingW = false;
+                    ismovingA = false;
+                    ismovingS = false;
+                    ismovingD = false;
+                }
 
 
-        }
-
-        if (ismovingS == true)
-        {
-            if (gameObject.transform.position != pontoDeColisao4.transform.position)
-            {
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao4.transform.position, 0.5f * velocity * Time.deltaTime);
-                var = false;
-            }
-            else
-            {
-                var = true;
-                ismovingW = false;
-                ismovingA = false;
-                ismovingS = false;
-                ismovingD = false;
             }
 
-
-
-        }
-
-        if (ismovingA == true)
-        {
-            if (gameObject.transform.position != pontoDeColisao2.transform.position)
+            if (ismovingS == true)
             {
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao2.transform.position, 0.5f * velocity * Time.deltaTime);
-                var = false;
+                if (gameObject.transform.position != pontoDeColisao4.transform.position)
+                {
+                    transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao4.transform.position, 0.5f * velocity * Time.deltaTime);
+                    var = false;
+                }
+                else
+                {
+                    var = true;
+                    ismovingW = false;
+                    ismovingA = false;
+                    ismovingS = false;
+                    ismovingD = false;
+                }
+
+
+
             }
-            else
+
+            if (ismovingA == true)
             {
-                var = true;
-                ismovingW = false;
-                ismovingA = false;
-                ismovingS = false;
-                ismovingD = false;
+                if (gameObject.transform.position != pontoDeColisao2.transform.position)
+                {
+                    transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao2.transform.position, 0.5f * velocity * Time.deltaTime);
+                    var = false;
+                }
+                else
+                {
+                    var = true;
+                    ismovingW = false;
+                    ismovingA = false;
+                    ismovingS = false;
+                    ismovingD = false;
+                }
+
+
+            }
+
+            if (ismovingD == true)
+            {
+                if (gameObject.transform.position != pontoDeColisao3.transform.position)
+                {
+                    transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao3.transform.position, 0.5f * velocity * Time.deltaTime);
+                    var = false;
+                }
+                else
+                {
+                    var = true;
+                    ismovingW = false;
+                    ismovingA = false;
+                    ismovingS = false;
+                    ismovingD = false;
+                }
             }
 
 
-        }
 
-        if (ismovingD == true)
-        {
-            if (gameObject.transform.position != pontoDeColisao3.transform.position)
-            {
-                transform.position = Vector3.Lerp(gameObject.transform.position, pontoDeColisao3.transform.position, 0.5f * velocity * Time.deltaTime);
-                var = false;
-            }
-            else
-            {
-                var = true;
-                ismovingW = false;
-                ismovingA = false;
-                ismovingS = false;
-                ismovingD = false;
-            }
 
 
         }
@@ -226,25 +241,28 @@ public class enemy : MonoBehaviour
             disabilita = true;
         }
         #endregion
-        
 
-         
 
-        if (flagcaptured == true)
+
+        if (isLocalPlayer)
         {
-            flag.transform.position = gameObject.transform.position;
+            if (flagcaptured == true)
+            {
+                flag.transform.position = gameObject.transform.position;
+            }
         }
 
 
-        if(speed == true)
+
+        if (speed == true)
         {
             velocity = 60f;
             textgo.SetActive(true);
             textui.text = "Speed UP";
         }
-       
 
-        if(firerate == true)
+
+        if (firerate == true)
         {
             fire_rate = 0.5f;
             textgo.SetActive(true);
@@ -253,22 +271,22 @@ public class enemy : MonoBehaviour
         else
         {
             fire_rate = 2;
-            
-            
+
+
         }
-        if(speeddown == true)
+        if (speeddown == true)
         {
             final.f.velocity = 0;
             textgo.SetActive(true);
             textui.text = "Stun Blue Player";
         }
-        if(morreu == false && speed == false)
+        if (morreu == false && speed == false)
         {
             velocity = 30f;
-            
-            
+
+
         }
-       
+
 
 
     }
@@ -286,9 +304,9 @@ public class enemy : MonoBehaviour
         }
         if (other.gameObject.CompareTag("bala"))
         {
-            
 
-            if(shield == false)
+
+            if (shield == false)
             {
                 Morte();
             }
@@ -297,27 +315,32 @@ public class enemy : MonoBehaviour
                 shield = false;
                 shieldSphere.SetActive(false);
             }
-            
+
 
 
         }
 
-        if(other.gameObject.CompareTag("flagA"))
+        if (other.gameObject.CompareTag("flagA"))
         {
             flagcaptured = true;
 
         }
 
-        if(other.gameObject.CompareTag("flagV") && flagcaptured == true)
+        if(isServer)
         {
-            placar.enemypoints++;
-            SceneManager.LoadScene(1);
-            part.transform.position = gameObject.transform.position;
-            part.Play();
+            if (other.gameObject.CompareTag("flagV") && flagcaptured == true)
+            {
+               
+                placar.enemypoints++;               
+                SceneManager.LoadScene(1);
+                part.transform.position = gameObject.transform.position;
+                part.Play();
 
+            }
         }
+       
 
-        if(other.gameObject.CompareTag("shieldPU2"))
+        if (other.gameObject.CompareTag("shieldPU2"))
         {
             shield = true;
             shieldSphere.SetActive(true);
@@ -327,7 +350,7 @@ public class enemy : MonoBehaviour
             part.Play();
         }
 
-        if(other.gameObject.CompareTag("speedPU2"))
+        if (other.gameObject.CompareTag("speedPU2"))
         {
             StartCoroutine(speedI());
             Debug.Log("speed");
@@ -336,7 +359,7 @@ public class enemy : MonoBehaviour
             part.Play();
         }
 
-        if(other.gameObject.CompareTag("fireratePU2"))
+        if (other.gameObject.CompareTag("fireratePU2"))
         {
             StartCoroutine(firerateI());
             Debug.Log("FIRERATE");
@@ -345,7 +368,7 @@ public class enemy : MonoBehaviour
             part.Play();
         }
 
-        if(other.gameObject.CompareTag("speedDownPU2"))
+        if (other.gameObject.CompareTag("speedDownPU2"))
         {
             StartCoroutine(stun());
             Debug.Log("speed down");
@@ -353,22 +376,27 @@ public class enemy : MonoBehaviour
             part.transform.position = gameObject.transform.position;
             part.Play();
         }
-     
+
     }
 
+    [Command]
     void Atirar()
     {
 
         time_between_shoots = Time.time + fire_rate;
         GameObject clonebullet = Instantiate(bala, spawnPoint.transform.position, Quaternion.identity);
-
+        NetworkServer.Spawn(clonebullet);
 
     }
     
     void Morte()
     {
         morreu = true;
-        placar.playerpoints++;
+        if(isServer)
+        {
+            placar.playerpoints++;
+        }
+      
         part.transform.position = gameObject.transform.position;
         part.Play();
         velocity = 0;
@@ -405,5 +433,6 @@ public class enemy : MonoBehaviour
         Debug.Log("stun false");
     }
    
+    
 
 }

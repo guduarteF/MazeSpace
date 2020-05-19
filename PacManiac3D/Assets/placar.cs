@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class placar : MonoBehaviour
+public class placar : NetworkBehaviour
 {
     public TextMesh Texto;
-    public Text placarText;
+    [SyncVar(hook = "placarTxt")] public Text placarText;
+   
+    
     public static int playerpoints, enemypoints;
     void Start()
     {
@@ -16,13 +19,19 @@ public class placar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        placarText.text = playerpoints + "x" + enemypoints;
-
+        if(isLocalPlayer)
+        {
+            placarTxt(placarText);
+        }
+       
 
 
     }
 
-   
+   void placarTxt(Text placarText)
+    {
+        placarText.text = playerpoints + "x" + enemypoints;
+    }
 
 
 }
