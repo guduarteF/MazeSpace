@@ -10,7 +10,7 @@ public class balaS : NetworkBehaviour
 
     private void Start()
     {
-        transform.rotation = final.f.transform.rotation;
+      //  transform.rotation = final.f.transform.rotation;
         
         
        

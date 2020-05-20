@@ -28,11 +28,13 @@ public class final : NetworkBehaviour
 
 
     public static bool disabilita;
-
+    [SyncVar]
     public GameObject bala;
+    [SyncVar]
     public GameObject spawnPoint;
-
+    [SyncVar]
     public float fire_rate = 2f;
+    [SyncVar]
     public float time_between_shoots;
 
     public ParticleSystem part;
@@ -387,14 +389,11 @@ public class final : NetworkBehaviour
     [Command]
     void CmdAtirar()
     {
-       if(isLocalPlayer)
-        {
+      
             time_between_shoots = Time.time + fire_rate;
-            GameObject clonebullet = Instantiate(bala, spawnPoint.transform.position, Quaternion.identity);
-            NetworkServer.Spawn(clonebullet);
-        }
-           
-       
+            GameObject clonebullet =(GameObject)Instantiate(bala, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        NetworkServer.Spawn(clonebullet);
+             
     }
 
    void Morte()

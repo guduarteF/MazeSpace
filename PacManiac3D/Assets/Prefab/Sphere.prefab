@@ -202,7 +202,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   veloc: 50
-  player: {fileID: 3430578012545967812, guid: fc987aea2bfb1ea4987902ece078564b, type: 3}
 --- !u!135 &7875056855904098231
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -264,7 +263,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &-2319007982940386772
 MonoBehaviour:
   m_ObjectHideFlags: 0

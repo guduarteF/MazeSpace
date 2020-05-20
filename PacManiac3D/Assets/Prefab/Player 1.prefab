@@ -246,7 +246,7 @@ MonoBehaviour:
   shieldSphere: {fileID: 3430578012411485583}
   speedpart: {fileID: 3430578012319150203}
   player2: {fileID: 5071026932905166785, guid: cb382dec904569240ac49a58d1498ed7, type: 3}
-  spawnp2: {fileID: 8738397959601251301, guid: 1e0f40a48b630b541b197a8f00df33a3, type: 3}
+  spawnp2: {fileID: 3430578012476084787}
 --- !u!96 &3430578012545967819
 TrailRenderer:
   serializedVersion: 2

@@ -2946,7 +2946,7 @@ MonoBehaviour:
   m_OfflineScene: 
   m_OnlineScene: 
   m_SpawnPrefabs:
-  - {fileID: 8952847540789081731, guid: 0f2fede1c0637394e9b2d85be6622401, type: 3}
+  - {fileID: 5395345094519412008, guid: c4db78aba7305c3479397ea1d4f56d7e, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -3604,15 +3604,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1226270547823348755, guid: 6975c63edbf77454d925dad4904e8ef4,
-        type: 3}
-      propertyPath: m_TransformSyncMode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2515534000835653089, guid: 6975c63edbf77454d925dad4904e8ef4,
         type: 3}
       propertyPath: m_Name
       value: Blueflag
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226270547823348755, guid: 6975c63edbf77454d925dad4904e8ef4,
+        type: 3}
+      propertyPath: m_TransformSyncMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2515534000835653094, guid: 6975c63edbf77454d925dad4904e8ef4,
         type: 3}
