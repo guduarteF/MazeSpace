@@ -87,8 +87,7 @@ public class enemy : NetworkBehaviour
     void FixedUpdate()
     {
         #region input and raycast
-        if (isLocalPlayer)
-        {
+       
 
             if (terminocenter == true && ismovingA == false && ismovingD == false && ismovingS == false && ismovingW == false)
             {
@@ -139,7 +138,7 @@ public class enemy : NetworkBehaviour
 
 
             }
-        }
+        
 
         #endregion
 

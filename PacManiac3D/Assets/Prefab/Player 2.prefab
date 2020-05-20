@@ -172,20 +172,19 @@ MonoBehaviour:
   terminocenter: 0
   var: 0
   bala: {fileID: 5395345094519412008, guid: bc2e6b15af46ed647aa371ef0fc407ac, type: 3}
-  spawnPoint: {fileID: 5071026931969482333}
+  spawnPoint: {fileID: 8738397959601251301, guid: 1e0f40a48b630b541b197a8f00df33a3,
+    type: 3}
   fire_rate: 2
   time_between_shoots: 0
-  part: {fileID: 0}
+  part: {fileID: 4909210937798763960, guid: 10280b241eebd8f4ea9fbf24c4707382, type: 3}
   mesh: {fileID: 5071026932905166845}
   cilindermesh: {fileID: 5071026933852832428}
-  flag: {fileID: 0}
+  flag: {fileID: 2515534000835653089, guid: 6975c63edbf77454d925dad4904e8ef4, type: 3}
   velocity: 0
   shieldSphere: {fileID: 5071026933444653815}
   speedpart: {fileID: 5071026932932006996}
   textgo: {fileID: 0}
   textui: {fileID: 0}
-  startPoint2: {fileID: 1376991424482801571, guid: 1e0f40a48b630b541b197a8f00df33a3,
-    type: 3}
 --- !u!96 &5071026932905166846
 TrailRenderer:
   serializedVersion: 2
@@ -323,7 +322,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &4654609310022540084
 MonoBehaviour:
   m_ObjectHideFlags: 0

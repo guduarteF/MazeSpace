@@ -49,16 +49,13 @@ public class final : NetworkBehaviour
     public float velocity;
     public GameObject shieldSphere;
     public ParticleSystem speedpart;
-
+    public GameObject player2;
+    public GameObject spawnp2;
     
     private bool morreu;
 
 
     #endregion
-
-
-
-
 
 
     void Start()
@@ -73,17 +70,19 @@ public class final : NetworkBehaviour
         f = this;
         deploymentHeight = 45f;
         velocity = 30f;
-        
+
+     
+
 
     }
-
+    
     private void Update()
     {
         if(isLocalPlayer)
         {
             if (Input.GetKeyUp(KeyCode.E) && Time.time > time_between_shoots)
             {
-                Atirar();
+                CmdAtirar();
             }
         }
        
@@ -254,16 +253,8 @@ public class final : NetworkBehaviour
                 flag.transform.position = gameObject.transform.position;
             }
         }
-        
 
-
-
-
-
-
-
-
-
+        #region POWERUP 
 
 
         if (speed == true)
@@ -298,12 +289,11 @@ public class final : NetworkBehaviour
 
 
         }
-
-
+        #endregion
 
     }
 
-
+    #region TRIGGER
     private void OnTriggerEnter(Collider other)
     {
 
@@ -390,14 +380,20 @@ public class final : NetworkBehaviour
             part.Play();
         }
     }
+    #endregion
+
+   
 
     [Command]
-    void Atirar()
+    void CmdAtirar()
     {
-       
+       if(isLocalPlayer)
+        {
             time_between_shoots = Time.time + fire_rate;
             GameObject clonebullet = Instantiate(bala, spawnPoint.transform.position, Quaternion.identity);
-        NetworkServer.Spawn(clonebullet);
+            NetworkServer.Spawn(clonebullet);
+        }
+           
        
     }
 
@@ -418,6 +414,7 @@ public class final : NetworkBehaviour
         
     }
 
+    #region IENUMERATOR
     IEnumerator speedI()
     {
         speed = true;
@@ -445,5 +442,5 @@ public class final : NetworkBehaviour
         Debug.Log("stun false");
     }
 
-
+    #endregion
 }

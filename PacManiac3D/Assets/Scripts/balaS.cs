@@ -1,23 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class balaS : MonoBehaviour
+public class balaS : NetworkBehaviour
 {
     public float veloc;
-    private RaycastHit ray;
-    private LayerMask parede;
-    private SphereCollider sph;
-    void Start()
+    
+
+    private void Start()
     {
         transform.rotation = final.f.transform.rotation;
+        
+        
+       
+
     }
+   
+       
+        
+    
 
     // Update is called once per frame
     void Update()
     {
-        Color red = Color.red;
-        transform.Translate(Vector3.back * veloc * Time.deltaTime);
+        
+        
+            transform.Translate(Vector3.back * veloc * Time.deltaTime);
+        
+        
+        
+        
 
     }
   
@@ -33,5 +46,6 @@ public class balaS : MonoBehaviour
 
         }
     }
+
 
 }

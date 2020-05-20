@@ -7,7 +7,9 @@ using UnityEngine.Networking;
 public class placar : NetworkBehaviour
 {
     public TextMesh Texto;
-    [SyncVar(hook = "placarTxt")] public Text placarText;
+    [SyncVar] 
+    Text placarText;
+    
    
     
     public static int playerpoints, enemypoints;
