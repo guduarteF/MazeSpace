@@ -17,64 +17,64 @@ public class menuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(placar.playerpoints >= 5 && gameover.empate == false)
-        {
-           
-            winner.text = "Player 1 Wins";
+        //    if(placar.playerpoints >= 5 && gameover.empate == false)
+        //    {
+
+        //        winner.text = "Player 1 Wins";
 
 
-        }
+        //    }
 
-        if (placar.enemypoints >= 5 && gameover.empate == false)
-        {
-          
-            winner.text = "Player 2 Wins";
-        }
+        //    if (placar.enemypoints >= 5 && gameover.empate == false)
+        //    {
+
+        //        winner.text = "Player 2 Wins";
+        //    }
 
 
 
-        if (gameover.empate == true)
-        {
-            
-            winner.text = "DRAW";
-        }
+        //    if (gameover.empate == true)
+        //    {
 
+        //        winner.text = "DRAW";
+        //    }
+
+        //}
+
+        //public void Restart()
+        //{
+        //    SceneManager.LoadScene(1);
+        //    placar.playerpoints = 0;
+        //    placar.enemypoints = 0;
+        //}
+
+        //public void Quit()
+        //{
+        //    Application.Quit();
+        //}
+
+        //public void Menu()
+        //{
+        //    SceneManager.LoadScene(0);
+        //}
+
+        //public void Pause()
+        //{
+        //    Time.timeScale = 0;
+
+        //}
+
+        //public void Controls()
+        //{
+        //    SceneManager.LoadScene(2);   
+        //}
+
+        //public static IEnumerator RestartDelay()
+        //{       
+        //    yield return new WaitForSeconds(1.5f);
+        //    SceneManager.LoadScene(1);
+        //}
     }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene(1);
-        placar.playerpoints = 0;
-        placar.enemypoints = 0;
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
-
-    public void Menu()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    public void Pause()
-    {
-        Time.timeScale = 0;
-
-    }
-
-    public void Controls()
-    {
-        SceneManager.LoadScene(2);   
-    }
-
-    public static IEnumerator RestartDelay()
-    {       
-        yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene(1);
-    }
-
    
 }
 

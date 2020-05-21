@@ -2,38 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
 
-public class placar : NetworkBehaviour
+
+public class placar : MonoBehaviour
 {
-    public TextMesh Texto;
-    [SyncVar] 
-    Text placarText;
+   // public TextMesh Texto;
+   // [SyncVar] 
+   // Text placarText;
     
    
     
-    public static int playerpoints, enemypoints;
-    void Start()
-    {
+   // public static int playerpoints, enemypoints;
+   // void Start()
+   // {
        
-    }
+   // }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(isLocalPlayer)
-        {
-            placarTxt(placarText);
-        }
+   // // Update is called once per frame
+   // void Update()
+   // {
+   //     if(isLocalPlayer)
+   //     {
+   //         placarTxt(placarText);
+   //     }
        
 
 
-    }
+   // }
 
-   void placarTxt(Text placarText)
-    {
-        placarText.text = playerpoints + "x" + enemypoints;
-    }
+   //void placarTxt(Text placarText)
+   // {
+   //     placarText.text = playerpoints + "x" + enemypoints;
+   // }
 
 
 }

@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class final : NetworkBehaviour
 {
     #region variaveis
+
     public float deploymentHeight;
     public static final f;
 
@@ -17,51 +18,54 @@ public class final : NetworkBehaviour
     public LayerMask points;
     public LayerMask parede;
 
-    public bool ismovingW;
-    public bool ismovingS;
-    public bool ismovingA;
-    public bool ismovingD;
+    private bool ismovingW;
+    private bool ismovingS;
+    private bool ismovingA;
+    private bool ismovingD;
 
-    
+
     public bool terminocenter;
     public bool var;
 
 
-    public static bool disabilita;
-    [SyncVar]
+    public static bool disabilita;  
     public GameObject bala;
-    [SyncVar]
     public GameObject spawnPoint;
     [SyncVar]
-    public float fire_rate = 2f;
+    private float fire_rate = 2f;
     [SyncVar]
-    public float time_between_shoots;
+    private float time_between_shoots;
 
     public ParticleSystem part;
     public MeshRenderer mesh;
     public MeshRenderer cilindermesh;
+    [SerializeField]
+    private GameObject partgo;
 
     private bool flagcaptured;
-    public GameObject flag;
+   // public GameObject flag;
 
-    private bool shield;
-    private bool speed;
-    private bool firerate;
-    private bool speeddown;
-    public float velocity;
-    public GameObject shieldSphere;
-    public ParticleSystem speedpart;
-    public GameObject player2;
-    public GameObject spawnp2;
+   // private bool shield;
+   // private bool speed;
+   // private bool firerate;
+   // private bool speeddown;
+    private float velocity;
+   // public GameObject shieldSphere;
+   // public ParticleSystem speedpart;
+   // public GameObject player2;
+   // public GameObject spawnp2;
+   // private bool morreu;  
+    private bool redtrigger;
     
-    private bool morreu;
+
+   
 
 
     #endregion
 
 
     void Start()
-    {       
+    {
         ismovingA = false;
         ismovingD = false;
         ismovingS = false;
@@ -72,22 +76,27 @@ public class final : NetworkBehaviour
         f = this;
         deploymentHeight = 45f;
         velocity = 30f;
-
-     
-
+        redtrigger = true;
+        
+        
 
     }
-    
+
     private void Update()
     {
-        if(isLocalPlayer)
+       
+       
+        
+        if (isLocalPlayer)
         {
             if (Input.GetKeyUp(KeyCode.E) && Time.time > time_between_shoots)
             {
+                time_between_shoots = Time.time + fire_rate;
                 CmdAtirar();
             }
         }
-       
+
+
 
     }
 
@@ -98,6 +107,8 @@ public class final : NetworkBehaviour
 
         if (isLocalPlayer)
         {
+
+
             if (terminocenter == true && ismovingA == false && ismovingD == false && ismovingS == false && ismovingW == false)
             {
 
@@ -148,14 +159,14 @@ public class final : NetworkBehaviour
 
             }
         }
-       
-       
+
+
 
         #endregion
 
         #region movement
 
-        if(isLocalPlayer)
+        if (isLocalPlayer)
         {
             if (ismovingW == true)
             {
@@ -236,7 +247,7 @@ public class final : NetworkBehaviour
             }
         }
         //XXXXXXXXXXXXXXXXXXXX MOVING XXXXXXXXXXXXXXXXXXXXXX
-       
+
 
         if (var == true)
         {
@@ -248,49 +259,49 @@ public class final : NetworkBehaviour
         }
         #endregion
 
-        if(isLocalPlayer)
-        {
-            if (flagcaptured == true)
-            {
-                flag.transform.position = gameObject.transform.position;
-            }
-        }
+        //if(isLocalPlayer)
+        //{
+        //    if (flagcaptured == true)
+        //    {
+        //        flag.transform.position = gameObject.transform.position;
+        //    }
+        //}
 
         #region POWERUP 
 
 
-        if (speed == true)
-        {
-            velocity = 60f;
-            UI_TextManager.ui.textgo.SetActive(true);
-            UI_TextManager.ui.textui.text = "Speed UP";
-        }
-       
-
-        if (firerate == true)
-        {
-            fire_rate = 0.5f;
-            UI_TextManager.ui.textgo.SetActive(true);
-            UI_TextManager.ui.textui.text = "Fire-rate Buff";
-        }
-        else
-        {
-            fire_rate = 2;
+        //if (speed == true)
+        //{
+        //    velocity = 60f;
+        //    UI_TextManager.ui.textgo.SetActive(true);
+        //    UI_TextManager.ui.textui.text = "Speed UP";
+        //}
 
 
-        }
-        if (speeddown == true)
-        {
-            final.f.velocity = 0;
-            UI_TextManager.ui.textgo.SetActive(true);
-            UI_TextManager.ui.textui.text = "Stun Red Player";
-        }
-        if(morreu == false && speed == false)
-        {
-            velocity = 30f;
+        //if (firerate == true)
+        //{
+        //    fire_rate = 0.5f;
+        //    UI_TextManager.ui.textgo.SetActive(true);
+        //    UI_TextManager.ui.textui.text = "Fire-rate Buff";
+        //}
+        //else
+        //{
+        //    fire_rate = 2;
 
 
-        }
+        //}
+        //if (speeddown == true)
+        //{
+        //    final.f.velocity = 0;
+        //    UI_TextManager.ui.textgo.SetActive(true);
+        //    UI_TextManager.ui.textui.text = "Stun Red Player";
+        //}
+        //if(morreu == false && speed == false)
+        //{
+        //    velocity = 30f;
+
+
+        //}
         #endregion
 
     }
@@ -298,148 +309,162 @@ public class final : NetworkBehaviour
     #region TRIGGER
     private void OnTriggerEnter(Collider other)
     {
+      
+           
+               
 
-              
         if (other.gameObject.CompareTag("center"))
         {
             terminocenter = true;
+
+        }
+
+        if(other.gameObject.CompareTag("bala"))
+        {
            
-        }
-
-        if(other.gameObject.CompareTag("balaE"))
-        {
+                RpcMorte();
             
-            if(shield == false)
-            {
-                Morte();
-            }
-            else
-            {
-                shield = false;
-                shieldSphere.SetActive(false);
-            }
-            
+        ////    if(shield == false)
+        ////    {
+                
+        ////    }
+        ////    else
+        ////    {
+        ////        shield = false;
+        ////        shieldSphere.SetActive(false);
+        ////    }
+
 
         }
 
-       
-            if (other.gameObject.CompareTag("flagV"))
-            {
 
-                flagcaptured = true;
+        // if (other.gameObject.CompareTag("flagV"))
+        // {
+
+        //     flagcaptured = true;
 
 
-           }
-        
-       
-            if(isServer)
-        {
-            if (other.gameObject.CompareTag("flagA") && flagcaptured == true)
-            {
-                placar.playerpoints++;
-                SceneManager.LoadScene(1);
-                part.transform.position = gameObject.transform.position;
-                part.Play();
-            }
-        }
-       
+        //}
 
-        if (other.gameObject.CompareTag("shieldPU"))
-        {
-            shield = true;
-            shieldSphere.SetActive(true);
-            Debug.Log("shield");
-            Destroy(other.gameObject);
-            part.transform.position = gameObject.transform.position;
-            part.Play();
 
-        }
+        //    if(isServer)
+        //{
+        //    if (other.gameObject.CompareTag("flagA") && flagcaptured == true)
+        //    {
+        //        placar.playerpoints++;
+        //        SceneManager.LoadScene(1);
+        //        part.transform.position = gameObject.transform.position;
+        //        part.Play();
+        //    }
+        //}
 
-        if (other.gameObject.CompareTag("speedPU"))
-        {
-            StartCoroutine(speedI());
-            Debug.Log("SPEED");
-            Destroy(other.gameObject);
-            part.transform.position = gameObject.transform.position;
-            part.Play();
-        }
 
-        if (other.gameObject.CompareTag("fireratePU"))
-        {
-            StartCoroutine(firerateI());
-            Debug.Log("FIRERATE");
-            Destroy(other.gameObject);
-            part.transform.position = gameObject.transform.position;
-            part.Play();
-        }
+        //if (other.gameObject.CompareTag("shieldPU"))
+        //{
+        //    shield = true;
+        //    shieldSphere.SetActive(true);
+        //    Debug.Log("shield");
+        //    Destroy(other.gameObject);
+        //    part.transform.position = gameObject.transform.position;
+        //    part.Play();
 
-        if(other.gameObject.CompareTag("speedDownPU"))
-        {
-            StartCoroutine(stun());
-            Debug.Log("SPEED DOWN");
-            Destroy(other.gameObject);
-            part.transform.position = gameObject.transform.position;
-            part.Play();
-        }
+        //}
+
+        //if (other.gameObject.CompareTag("speedPU"))
+        //{
+        //    StartCoroutine(speedI());
+        //    Debug.Log("SPEED");
+        //    Destroy(other.gameObject);
+        //    part.transform.position = gameObject.transform.position;
+        //    part.Play();
+        //}
+
+        //if (other.gameObject.CompareTag("fireratePU"))
+        //{
+        //    StartCoroutine(firerateI());
+        //    Debug.Log("FIRERATE");
+        //    Destroy(other.gameObject);
+        //    part.transform.position = gameObject.transform.position;
+        //    part.Play();
+        //}
+
+        //if(other.gameObject.CompareTag("speedDownPU"))
+        //{
+        //    StartCoroutine(stun());
+        //    Debug.Log("SPEED DOWN");
+        //    Destroy(other.gameObject);
+        //    part.transform.position = gameObject.transform.position;
+        //    part.Play();
+        //}
     }
     #endregion
 
-   
+
 
     [Command]
     void CmdAtirar()
-    {
-      
-            time_between_shoots = Time.time + fire_rate;
-            GameObject clonebullet =(GameObject)Instantiate(bala, spawnPoint.transform.position, spawnPoint.transform.rotation);
+    {     
+        GameObject clonebullet = (GameObject)Instantiate(bala, spawnPoint.transform.position, spawnPoint.transform.rotation);
         NetworkServer.Spawn(clonebullet);
-             
+
     }
 
-   void Morte()
-    {
-        morreu = true;
-        if(isServer)
-        {
-            placar.enemypoints++;
-        }
-        
-        part.transform.position = gameObject.transform.position;
+    
+   
+    
+
+
+    
+
+   [ClientRpc]
+
+   public void RpcMorte()
+   {
+        //     morreu = true;
+        //     if (isServer)
+        //     {
+        //         placar.enemypoints++;
+        //     }
+        GameObject partclone = Instantiate(partgo, gameObject.transform.position, Quaternion.identity);
+        //part.transform.position = gameObject.transform.position;
+        //NetworkServer.Spawn(partclone);
         part.Play();
-        velocity = 0;
-        StartCoroutine(menuManager.RestartDelay());
-        mesh.enabled = false;
-        cilindermesh.enabled = false;
+   //     velocity = 0;
+   //     StartCoroutine(menuManager.RestartDelay());
+     mesh.enabled = false;
+     cilindermesh.enabled = false;
         
-    }
+   }
 
     #region IENUMERATOR
-    IEnumerator speedI()
-    {
-        speed = true;
-        speedpart.Play();
-        yield return new WaitForSeconds(3);
-        UI_TextManager.ui.textgo.SetActive(false);
-        speedpart.Stop();
-        speed = false;
-        Debug.Log("speed false");
-    }
-    IEnumerator firerateI()
-    {
-        firerate = true;
-        yield return new WaitForSeconds(4);
-        UI_TextManager.ui.textgo.SetActive(false);
-        firerate = false;
-        Debug.Log("firerate false");
-    }
-    IEnumerator stun()
-    {
-        speeddown = true;
-        yield return new WaitForSeconds(2);
-        UI_TextManager.ui.textgo.SetActive(false);
-        speeddown = false;
-        Debug.Log("stun false");
-    }
+    //IEnumerator speedI()
+    //{
+    //    speed = true;
+    //    speedpart.Play();
+    //    yield return new WaitForSeconds(3);
+    //    UI_TextManager.ui.textgo.SetActive(false);
+    //    speedpart.Stop();
+    //    speed = false;
+    //    Debug.Log("speed false");
+    //}
+    //IEnumerator firerateI()
+    //{
+    //    firerate = true;
+    //    yield return new WaitForSeconds(4);
+    //    UI_TextManager.ui.textgo.SetActive(false);
+    //    firerate = false;
+    //    Debug.Log("firerate false");
+    //}
+    //IEnumerator stun()
+    //{
+    //    speeddown = true;
+    //    yield return new WaitForSeconds(2);
+    //    UI_TextManager.ui.textgo.SetActive(false);
+    //    speeddown = false;
+    //    Debug.Log("stun false");
+    //}
+
+   
 
     #endregion
 }

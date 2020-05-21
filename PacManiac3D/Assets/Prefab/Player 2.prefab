@@ -96,7 +96,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 44f84446e51fdca4fac2b92fb3337e22, type: 2}
+  - {fileID: 2100000, guid: dbd54c57bc795c548b9a89a41c605422, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -158,33 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c626cfb88483174682271db98a6ccc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deploymentHeight: 45
-  points:
-    serializedVersion: 2
-    m_Bits: 512
-  parede:
-    serializedVersion: 2
-    m_Bits: 8448
-  ismovingW: 0
-  ismovingS: 0
-  ismovingA: 0
-  ismovingD: 0
-  terminocenter: 0
-  var: 0
-  bala: {fileID: 5395345094519412008, guid: bc2e6b15af46ed647aa371ef0fc407ac, type: 3}
-  spawnPoint: {fileID: 8738397959601251301, guid: 1e0f40a48b630b541b197a8f00df33a3,
-    type: 3}
-  fire_rate: 2
-  time_between_shoots: 0
-  part: {fileID: 4909210937798763960, guid: 10280b241eebd8f4ea9fbf24c4707382, type: 3}
-  mesh: {fileID: 5071026932905166845}
-  cilindermesh: {fileID: 5071026933852832428}
-  flag: {fileID: 2515534000835653089, guid: 6975c63edbf77454d925dad4904e8ef4, type: 3}
-  velocity: 0
-  shieldSphere: {fileID: 5071026933444653815}
-  speedpart: {fileID: 5071026932932006996}
-  textgo: {fileID: 0}
-  textui: {fileID: 0}
 --- !u!96 &5071026932905166846
 TrailRenderer:
   serializedVersion: 2
@@ -5249,7 +5222,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 44f84446e51fdca4fac2b92fb3337e22, type: 2}
+  - {fileID: 2100000, guid: dbd54c57bc795c548b9a89a41c605422, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

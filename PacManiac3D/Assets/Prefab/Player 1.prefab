@@ -159,7 +159,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dbd54c57bc795c548b9a89a41c605422, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -228,25 +228,14 @@ MonoBehaviour:
   parede:
     serializedVersion: 2
     m_Bits: 256
-  ismovingW: 0
-  ismovingS: 0
-  ismovingA: 0
-  ismovingD: 0
   terminocenter: 0
   var: 0
   bala: {fileID: 5395345094519412008, guid: c4db78aba7305c3479397ea1d4f56d7e, type: 3}
   spawnPoint: {fileID: 3430578012476084787}
-  fire_rate: 2
-  time_between_shoots: 0
   part: {fileID: 7899262739298294185, guid: b88107d257aba494e899a5322ecf8bdf, type: 3}
   mesh: {fileID: 3430578012545967817}
   cilindermesh: {fileID: 3430578012570502661}
-  flag: {fileID: 4400896193955574092, guid: 83301ee2815e80540a048241282e3564, type: 3}
-  velocity: 0
-  shieldSphere: {fileID: 3430578012411485583}
-  speedpart: {fileID: 3430578012319150203}
-  player2: {fileID: 5071026932905166785, guid: cb382dec904569240ac49a58d1498ed7, type: 3}
-  spawnp2: {fileID: 3430578012476084787}
+  partgo: {fileID: 7899262739298294187, guid: b88107d257aba494e899a5322ecf8bdf, type: 3}
 --- !u!96 &3430578012545967819
 TrailRenderer:
   serializedVersion: 2
@@ -417,14 +406,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.1
+  m_SendInterval: 0.033333335
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
-  m_InterpolateRotation: 1
+  m_InterpolateRotation: 0
   m_InterpolateMovement: 1
 --- !u!1001 &7824932316781586734
 PrefabInstance:
@@ -498,12 +487,6 @@ PrefabInstance:
 --- !u!4 &3430578012319150197 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4831345340834765147, guid: 33d92597f91c982488febef74c7e1ef2,
-    type: 3}
-  m_PrefabInstance: {fileID: 7824932316781586734}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &3430578012319150203 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4831345340834765141, guid: 33d92597f91c982488febef74c7e1ef2,
     type: 3}
   m_PrefabInstance: {fileID: 7824932316781586734}
   m_PrefabAsset: {fileID: 0}

@@ -4,34 +4,34 @@ using UnityEngine;
 
 public class balaEnemy : MonoBehaviour
 {
-    public float veloc;
-    private RaycastHit ray;
-    private LayerMask parede;
-    private SphereCollider sph;
-    void Start()
-    {
-        transform.rotation = enemy.e.transform.rotation;
-    }
+    //public float veloc;
+    //private RaycastHit ray;
+    //private LayerMask parede;
+    //private SphereCollider sph;
+    //void Start()
+    //{
+    //    transform.rotation = enemy.e.transform.rotation;
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
-        Color red = Color.red;
-        transform.Translate(Vector3.back * veloc * Time.deltaTime);
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    Color red = Color.red;
+    //    transform.Translate(Vector3.back * veloc * Time.deltaTime);
 
-    }
+    //}
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.transform.name);
-        if (other.gameObject.CompareTag("parede"))
-        {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log(other.transform.name);
+    //    if (other.gameObject.CompareTag("parede"))
+    //    {
+    //        Destroy(other.gameObject);
+    //        Destroy(gameObject);
 
-        }
+    //    }
 
        
-    }
+    //}
 }

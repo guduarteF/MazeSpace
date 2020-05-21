@@ -15,22 +15,22 @@ public class disable2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        metodo();
+        //metodo();
     }
 
-    void metodo()
-    {
-        for (int i = 0; i < sphere.Length; i++)
-        {
-            if (enemy.disabilita == true)
-            {
-                sphere[i].enabled = false;
-            }
-            else
-            {
-                sphere[i].enabled = true;
-            }
+    //void metodo()
+    //{
+    //    for (int i = 0; i < sphere.Length; i++)
+    //    {
+    //        if (enemy.disabilita == true)
+    //        {
+    //            sphere[i].enabled = false;
+    //        }
+    //        else
+    //        {
+    //            sphere[i].enabled = true;
+    //        }
 
-        }
-    }
+    //    }
+    //}
 }

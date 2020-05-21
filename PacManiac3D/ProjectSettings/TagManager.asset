@@ -21,6 +21,7 @@ TagManager:
   - speedDownPU2
   - speedDownPU
   - center2
+  - redtrigger
   layers:
   - Default
   - TransparentFX

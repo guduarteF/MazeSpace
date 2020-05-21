@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class balaS : NetworkBehaviour
+
+public class balaS : MonoBehaviour
 {
+
     public float veloc;
     
 
@@ -37,12 +38,12 @@ public class balaS : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.transform.name);
+        //Debug.Log(other.transform.name);
         if (other.gameObject.CompareTag("parede"))
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             Destroy(gameObject);
-            
+
 
         }
     }

@@ -5,50 +5,50 @@ using UnityEngine.UI;
 
 public class gameover : MonoBehaviour
 {
-    public GameObject canvasfinal;
-    public static bool empate;
+    ////public GameObject canvasfinal;
+    ////public static bool empate;
    
     
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        canvasfinal.SetActive(false);   
-    }
+    ////// Start is called before the first frame update
+    ////void Start()
+    ////{
+    ////    canvasfinal.SetActive(false);   
+    ////}
 
-    // Update is called once per frame
-    void Update()
-    {
+    ////// Update is called once per frame
+    ////void Update()
+    ////{
         
-        if(placar.playerpoints >= 5 && empate == false)
-        {
-            canvasfinal.SetActive(true);
+    ////    if(placar.playerpoints >= 5 && empate == false)
+    ////    {
+    ////        canvasfinal.SetActive(true);
             
 
 
-        }
-        if (placar.enemypoints >= 5 &&  empate == false)
-        {
-            canvasfinal.SetActive(true);
+    ////    }
+    ////    if (placar.enemypoints >= 5 &&  empate == false)
+    ////    {
+    ////        canvasfinal.SetActive(true);
             
 
-        }
+    ////    }
 
-        if (placar.enemypoints >= 5 && placar.playerpoints >= 5)
-        {
-            empate = true;
+    ////    if (placar.enemypoints >= 5 && placar.playerpoints >= 5)
+    ////    {
+    ////        empate = true;
             
-        }
+    ////    }
 
-        if (empate == true)
-        {
-            canvasfinal.SetActive(true);
+    ////    if (empate == true)
+    ////    {
+    ////        canvasfinal.SetActive(true);
             
-        }
+    ////    }
 
-        if (placar.enemypoints >= 5 && placar.playerpoints >= 5)
-        {
-            empate = true;
-        }
-    }
+    ////    if (placar.enemypoints >= 5 && placar.playerpoints >= 5)
+    ////    {
+    ////        empate = true;
+    ////    }
+    ////}
 }
