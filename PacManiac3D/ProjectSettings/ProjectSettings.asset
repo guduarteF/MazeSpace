@@ -641,10 +641,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: e24ddbd2-f274-4f5f-b972-b924af836076
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: PacManiac3D
+  organizationId: gustavo64duarte
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

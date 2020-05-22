@@ -28,7 +28,7 @@ public class final : NetworkBehaviour
     public bool var;
 
 
-    public static bool disabilita;  
+    public static bool disabilita;
     public GameObject bala;
     public GameObject spawnPoint;
     [SyncVar]
@@ -43,22 +43,27 @@ public class final : NetworkBehaviour
     private GameObject partgo;
 
     private bool flagcaptured;
-   // public GameObject flag;
 
-   // private bool shield;
-   // private bool speed;
-   // private bool firerate;
-   // private bool speeddown;
+
+    // private bool shield;
+    // private bool speed;
+    // private bool firerate;
+    // private bool speeddown;
     private float velocity;
-   // public GameObject shieldSphere;
-   // public ParticleSystem speedpart;
-   // public GameObject player2;
-   // public GameObject spawnp2;
-   // private bool morreu;  
+    // public GameObject shieldSphere;
+    // public ParticleSystem speedpart;
+    // public GameObject player2;
+    // public GameObject spawnp2;
+    // private bool morreu;  
     private bool redtrigger;
-    
+    public GameObject bandeiraVermelha;
+    public GameObject bandeiraAzul;
+    public GameObject bv_Spawn;
+    public GameObject ba_Spawn;
 
-   
+
+
+
 
 
     #endregion
@@ -77,16 +82,17 @@ public class final : NetworkBehaviour
         deploymentHeight = 45f;
         velocity = 30f;
         redtrigger = true;
-        
-        
+        //RpcSpawnBandeiras();
+
+
 
     }
 
     private void Update()
     {
-       
-       
-        
+
+
+
         if (isLocalPlayer)
         {
             if (Input.GetKeyUp(KeyCode.E) && Time.time > time_between_shoots)
@@ -94,8 +100,19 @@ public class final : NetworkBehaviour
                 time_between_shoots = Time.time + fire_rate;
                 CmdAtirar();
             }
+
+
         }
 
+        if (isLocalPlayer)
+        {
+            if (flagcaptured == true)
+            {
+                RpcFlagCapture();
+
+            }
+
+        }
 
 
     }
@@ -259,13 +276,7 @@ public class final : NetworkBehaviour
         }
         #endregion
 
-        //if(isLocalPlayer)
-        //{
-        //    if (flagcaptured == true)
-        //    {
-        //        flag.transform.position = gameObject.transform.position;
-        //    }
-        //}
+       
 
         #region POWERUP 
 
@@ -309,9 +320,9 @@ public class final : NetworkBehaviour
     #region TRIGGER
     private void OnTriggerEnter(Collider other)
     {
-      
-           
-               
+
+
+
 
         if (other.gameObject.CompareTag("center"))
         {
@@ -319,32 +330,32 @@ public class final : NetworkBehaviour
 
         }
 
-        if(other.gameObject.CompareTag("bala"))
+        if (other.gameObject.CompareTag("bala"))
         {
-           
-                RpcMorte();
-            
-        ////    if(shield == false)
-        ////    {
-                
-        ////    }
-        ////    else
-        ////    {
-        ////        shield = false;
-        ////        shieldSphere.SetActive(false);
-        ////    }
+
+            RpcMorte();
+
+            ////    if(shield == false)
+            ////    {
+
+            ////    }
+            ////    else
+            ////    {
+            ////        shield = false;
+            ////        shieldSphere.SetActive(false);
+            ////    }
 
 
         }
 
 
-        // if (other.gameObject.CompareTag("flagV"))
-        // {
+        if (other.gameObject.CompareTag("flagV"))
+        {
 
-        //     flagcaptured = true;
+            flagcaptured = true;
 
 
-        //}
+        }
 
 
         //    if(isServer)
@@ -403,20 +414,38 @@ public class final : NetworkBehaviour
 
     [Command]
     void CmdAtirar()
-    {     
+    {
         GameObject clonebullet = (GameObject)Instantiate(bala, spawnPoint.transform.position, spawnPoint.transform.rotation);
         NetworkServer.Spawn(clonebullet);
 
     }
 
-    
-   
-    
+    //[ClientRpc]
+    //public void RpcSpawnBandeiras()
+    //{
+    //    GameObject clonebv = (GameObject)Instantiate(bandeiraVermelha, bv_Spawn.transform.position, Quaternion.identity);
+    //    GameObject cloneba = (GameObject)Instantiate(bandeiraAzul, ba_Spawn.transform.position, Quaternion.identity);
+    //}
+
+    [ClientRpc]
+    public void RpcFlagCapture()
+    {
+        if (flagcaptured == true)
+        {
+
+           
+        }
+    }
 
 
-    
 
-   [ClientRpc]
+    public override void OnStartLocalPlayer()
+    {
+        GetComponent<MeshRenderer>().material.color = Color.red;
+    }
+
+
+    [ClientRpc]
 
    public void RpcMorte()
    {
@@ -425,12 +454,12 @@ public class final : NetworkBehaviour
         //     {
         //         placar.enemypoints++;
         //     }
-        GameObject partclone = Instantiate(partgo, gameObject.transform.position, Quaternion.identity);
+        GameObject partclone = (GameObject)Instantiate(partgo, transform.position, Quaternion.identity);
         //part.transform.position = gameObject.transform.position;
         //NetworkServer.Spawn(partclone);
         part.Play();
-   //     velocity = 0;
-   //     StartCoroutine(menuManager.RestartDelay());
+       //     velocity = 0;
+       //     StartCoroutine(menuManager.RestartDelay());
      mesh.enabled = false;
      cilindermesh.enabled = false;
         

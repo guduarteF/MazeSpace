@@ -235,7 +235,15 @@ MonoBehaviour:
   part: {fileID: 7899262739298294185, guid: b88107d257aba494e899a5322ecf8bdf, type: 3}
   mesh: {fileID: 3430578012545967817}
   cilindermesh: {fileID: 3430578012570502661}
-  partgo: {fileID: 7899262739298294187, guid: b88107d257aba494e899a5322ecf8bdf, type: 3}
+  partgo: {fileID: 1117237999327058018, guid: 499866b9ec31ca14e81d4db018f1be23, type: 3}
+  bandeiraVermelha: {fileID: 4400896193955574092, guid: 83301ee2815e80540a048241282e3564,
+    type: 3}
+  bandeiraAzul: {fileID: 2515534000835653089, guid: 6975c63edbf77454d925dad4904e8ef4,
+    type: 3}
+  bv_Spawn: {fileID: 1864894172016379923, guid: c662f286404cb5f47ab234ea5848503f,
+    type: 3}
+  ba_Spawn: {fileID: 3109476634895619873, guid: 8b88dec44de514945a7c80d092f013b8,
+    type: 3}
 --- !u!96 &3430578012545967819
 TrailRenderer:
   serializedVersion: 2
@@ -515,7 +523,7 @@ PrefabInstance:
     - target: {fileID: 6905184063862472656, guid: 71524951c13991c40b8d163a3c950511,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.465
+      value: -0.62
       objectReference: {fileID: 0}
     - target: {fileID: 6905184063862472656, guid: 71524951c13991c40b8d163a3c950511,
         type: 3}
@@ -556,6 +564,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905184064770485221, guid: 71524951c13991c40b8d163a3c950511,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905184064770485221, guid: 71524951c13991c40b8d163a3c950511,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905184064770485221, guid: 71524951c13991c40b8d163a3c950511,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71524951c13991c40b8d163a3c950511, type: 3}
