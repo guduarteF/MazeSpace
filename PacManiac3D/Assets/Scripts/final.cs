@@ -42,7 +42,9 @@ public class final : NetworkBehaviour
     [SerializeField]
     private GameObject partgo;
 
-    private bool flagcaptured;
+    public bool flagV_captured, flagA_capture;
+    [SyncVar]
+    public Color color;
 
 
     // private bool shield;
@@ -56,12 +58,10 @@ public class final : NetworkBehaviour
     // public GameObject spawnp2;
     // private bool morreu;  
     private bool redtrigger;
-    public GameObject bandeiraVermelha;
-    public GameObject bandeiraAzul;
-    public GameObject bv_Spawn;
-    public GameObject ba_Spawn;
-
-
+   
+    private string _ID;
+    private int num;
+    public bool isPlayer1, isPlayer2;
 
 
 
@@ -84,6 +84,7 @@ public class final : NetworkBehaviour
         redtrigger = true;
         //RpcSpawnBandeiras();
 
+        _ID = "" + GetComponent<NetworkIdentity>().netId;
 
 
     }
@@ -91,7 +92,7 @@ public class final : NetworkBehaviour
     private void Update()
     {
 
-
+        
 
         if (isLocalPlayer)
         {
@@ -104,15 +105,28 @@ public class final : NetworkBehaviour
 
         }
 
-        if (isLocalPlayer)
-        {
-            if (flagcaptured == true)
-            {
-                RpcFlagCapture();
+     
+        
 
-            }
+        
+
+
+        if (int.Parse(_ID) % 2 == 0)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.blue;
+            isPlayer1 = true;
+            Debug.Log("PLAYER 1 LOGOU");
 
         }
+        else
+        {
+            GetComponent<MeshRenderer>().material.color = Color.red;
+            isPlayer2 = true;
+            Debug.Log("PLAYER 2 LOGOU");
+        }
+
+
+
 
 
     }
@@ -327,7 +341,7 @@ public class final : NetworkBehaviour
         if (other.gameObject.CompareTag("center"))
         {
             terminocenter = true;
-
+            
         }
 
         if (other.gameObject.CompareTag("bala"))
@@ -352,9 +366,15 @@ public class final : NetworkBehaviour
         if (other.gameObject.CompareTag("flagV"))
         {
 
-            flagcaptured = true;
+            flagV_captured = true;
+            Debug.Log("PEGOU VERMELHA");
 
+        }
 
+        if(other.gameObject.CompareTag("flagA"))
+        {
+            flagA_capture = true;
+            Debug.Log("PEGOU AZUl");
         }
 
 
@@ -427,22 +447,12 @@ public class final : NetworkBehaviour
     //    GameObject cloneba = (GameObject)Instantiate(bandeiraAzul, ba_Spawn.transform.position, Quaternion.identity);
     //}
 
-    [ClientRpc]
-    public void RpcFlagCapture()
-    {
-        if (flagcaptured == true)
-        {
-
-           
-        }
-    }
+ 
 
 
 
-    public override void OnStartLocalPlayer()
-    {
-        GetComponent<MeshRenderer>().material.color = Color.red;
-    }
+   
+    
 
 
     [ClientRpc]
