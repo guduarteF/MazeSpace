@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 546487181250475217}
   m_Layer: 0
   m_Name: PlayerCube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -283,8 +283,6 @@ MonoBehaviour:
   flagV_captured: 0
   flagA_capture: 0
   color: {r: 0, g: 0, b: 0, a: 0}
-  isPlayer1: 0
-  isPlayer2: 0
 --- !u!114 &546487181250475217
 MonoBehaviour:
   m_ObjectHideFlags: 0

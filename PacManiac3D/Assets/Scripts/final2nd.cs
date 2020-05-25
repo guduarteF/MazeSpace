@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
-public class final : NetworkBehaviour
+
+public class final2nd : NetworkBehaviour
 {
-    #region variaveis
-   
+    
     public float deploymentHeight;
-    public static final f;
+    public static final2nd f2nd;
 
     private RaycastHit pontoDeColisao1;
     private RaycastHit pontoDeColisao2;
@@ -41,6 +40,9 @@ public class final : NetworkBehaviour
     public MeshRenderer cilindermesh;
     [SerializeField]
     private GameObject partgo;
+
+    
+    public bool flagV_captured, flagA_capture;
     [SyncVar]
     public Color color;
 
@@ -54,16 +56,14 @@ public class final : NetworkBehaviour
     // public ParticleSystem speedpart;
     // public GameObject player2;
     // public GameObject spawnp2;
-    // private bool morreu;  
+    // private bool morreu; 
+    public string _ID;
  
-    private string _ID;
-    public bool isPlayer1;
-  
 
 
 
 
-    #endregion
+
 
 
     void Start()
@@ -75,10 +75,9 @@ public class final : NetworkBehaviour
         terminocenter = true;
         var = true;
         disabilita = true;
-        f = this;
+        f2nd = this;
         deploymentHeight = 45f;
         velocity = 30f;
-     
         //RpcSpawnBandeiras();
 
         _ID = "" + GetComponent<NetworkIdentity>().netId;
@@ -88,8 +87,21 @@ public class final : NetworkBehaviour
 
     private void Update()
     {
-
-      
+        if(isLocalPlayer)
+        {
+            if (int.Parse(_ID) % 2 == 0)
+            {
+                GetComponent<MeshRenderer>().material.color = Color.blue;
+                
+            }
+            else
+            {
+                GetComponent<MeshRenderer>().material.color = Color.red;
+                
+            }
+        }
+       
+       
 
         if (isLocalPlayer)
         {
@@ -101,32 +113,6 @@ public class final : NetworkBehaviour
 
 
         }
-
-
-
-
-
-       if(isLocalPlayer)
-        {
-            if (int.Parse(_ID) % 2 == 0)
-            {
-                GetComponent<MeshRenderer>().material.color = Color.red;
-                transform.gameObject.tag = "Player2";
-            }
-            else
-            {
-                GetComponent<MeshRenderer>().material.color = Color.blue;
-                isPlayer1 = true;             
-                transform.gameObject.tag = "Player";
-
-            }
-
-        }
-
-
-
-
-
 
 
 
@@ -294,7 +280,7 @@ public class final : NetworkBehaviour
         }
         #endregion
 
-       
+
 
         #region POWERUP 
 
@@ -345,7 +331,7 @@ public class final : NetworkBehaviour
         if (other.gameObject.CompareTag("center"))
         {
             terminocenter = true;
-            
+
         }
 
         if (other.gameObject.CompareTag("bala"))
@@ -438,18 +424,18 @@ public class final : NetworkBehaviour
     //    GameObject cloneba = (GameObject)Instantiate(bandeiraAzul, ba_Spawn.transform.position, Quaternion.identity);
     //}
 
- 
 
 
 
-   
-    
+
+
+
 
 
     [ClientRpc]
 
-   public void RpcMorte()
-   {
+    public void RpcMorte()
+    {
         //     morreu = true;
         //     if (isServer)
         //     {
@@ -459,12 +445,12 @@ public class final : NetworkBehaviour
         //part.transform.position = gameObject.transform.position;
         //NetworkServer.Spawn(partclone);
         part.Play();
-       //     velocity = 0;
-       //     StartCoroutine(menuManager.RestartDelay());
-     mesh.enabled = false;
-     cilindermesh.enabled = false;
-        
-   }
+        //     velocity = 0;
+        //     StartCoroutine(menuManager.RestartDelay());
+        mesh.enabled = false;
+        cilindermesh.enabled = false;
+
+    }
 
     #region IENUMERATOR
     //IEnumerator speedI()
@@ -494,7 +480,7 @@ public class final : NetworkBehaviour
     //    Debug.Log("stun false");
     //}
 
-   
+
 
     #endregion
 }
